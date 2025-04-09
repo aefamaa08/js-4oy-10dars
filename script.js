@@ -14,65 +14,25 @@
 //         },
 //         onClick: function () {}
 //     }).showToast();
-
-    
 function showNotification(type) {
-
-    var notification = document.createElement("div");
-
-  
-    var colors = {
-      success: "green",
-      fail: "red",
-      warning: "orange"
+    const messages = {
+      success: " Success! Everything is good.",
+      fail: " Error! Something went wrong.",
+      warning: " Warning! Be careful."
     };
 
-    var messages = {
-      success: "Well done!",
-      fail: "Oh snap! Something went wrong.",
-      warning: "Warning!"
+    const colors = {
+    //   success: "linear-gradient(to right, #00b09b, #96c93d)",
+    //   fail: "linear-gradient(to right, #e74c3c, #c0392b)",
+    //   warning: "linear-gradient(to right, #f39c12, #e67e22)"
     };
 
-   
-    notification.style.backgroundColor = colors[type];
-    notification.style.color = "white";
-    notification.style.padding = "10px 20px";
-    notification.style.margin = "10px";
-    notification.style.borderRadius = "8px";
-    notification.style.position = "relative";
-    notification.style.minWidth = "200px";
-
-  
-    notification.textContent = messages[type];
-
-    var closeBtn = document.createElement("span");
-    closeBtn.style.marginLeft = "15px";
-    closeBtn.style.cursor = "pointer";
-    closeBtn.style.fontWeight = "bold";
-    closeBtn.style.position = "absolute";
-    closeBtn.style.right = "10px";
-    closeBtn.style.top = "5px";
-    closeBtn.onclick = function () {
-      notification.remove();
-    };
-
-    notification.appendChild(closeBtn);
-
-    var container = document.querySelector(".notification-container");
-    if (!container) {
-      container = document.createElement("div");
-      container.className = "notification-container";
-      container.style.position = "fixed";
-      container.style.top = "20px";
-      container.style.right = "20px";
-      container.style.display = "flex";
-      container.style.flexDirection = "column";
-      document.body.appendChild(container);
-    }
-
-    container.appendChild(notification);
-
-    setTimeout(function () {
-      notification.remove();
-    }, 3000);
+    Toastify({
+      text: messages[type] || "Notification",
+      duration: 3000,
+      gravity: "top", 
+      position: "right",
+      backgroundColor: colors[type] || "#333",
+      close: true
+    }).showToast();
   }
